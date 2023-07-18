@@ -40,5 +40,8 @@ fun main(args: Array<String>) {
     leo.buyCard(chicagoSeagull)
     leo.buyCard(chicagoSquirrel)
 
+    leo.handleJewel(JewelType.BLUE, 1)
+    leo.buyCard(chicagoSeagull)
+
     println(leo.toString())
 }

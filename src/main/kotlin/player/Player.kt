@@ -10,9 +10,14 @@ data class Player(
 ) {
 
     fun buyCard(card: Card) {
-        if (card.validateIfUserCanBuy(jewels)) {
-            if (card.price.isNotEmpty()) {
+        val firstCard = cards.none { it.equals(card) }
+        if (card.validateIfUserCanBuy(jewels, firstCard)) {
+            if (card.price.isNotEmpty() && firstCard) {
                 card.price.entries.forEach { priceMap ->
+                    this.handleJewel(priceMap.key, (priceMap.value * -1))
+                }
+            } else if (card.price.isNotEmpty() && !firstCard) {
+                card.retrievePriceForSecondCard().entries.forEach { priceMap ->
                     this.handleJewel(priceMap.key, (priceMap.value * -1))
                 }
             }
